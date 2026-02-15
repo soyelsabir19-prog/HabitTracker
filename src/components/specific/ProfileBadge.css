@@ -1,0 +1,56 @@
+.profile-badge-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+}
+
+/* Badge container */
+.profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF; /* card white */
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #E3E6EA; /* soft divider */
+  box-shadow: 0 8px 24px rgba(47, 85, 151, 0.12);
+  font-size: 0.9rem;
+}
+
+/* Profile image */
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #BDD7EE; /* subtle blue ring */
+}
+
+/* Name text */
+.profile-name {
+  font-weight: 600;
+  color: #2F5597; /* dark blue */
+  white-space: nowrap;
+}
+
+/* Hover polish (desktop only) */
+@media (hover: hover) {
+  .profile-badge:hover {
+    box-shadow: 0 12px 30px rgba(47, 85, 151, 0.18);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
+
+/* Mobile tweak */
+@media (max-width: 576px) {
+  .profile-badge-wrapper {
+    top: 12px;
+    left: 12px;
+  }
+
+  .profile-name {
+    font-size: 0.85rem;
+  }
+}

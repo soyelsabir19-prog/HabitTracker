@@ -1,0 +1,113 @@
+.thumbnail-section {
+  background-color: #F4F7FA; /* primary canvas background */
+  padding: 3.5rem 1.5rem;
+  border-radius: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+/* Main title */
+.main-title {
+  color: #2F5597; /* dark authority blue */
+  font-weight: 800;
+  font-size: 2.6rem; /* desktop default */
+  letter-spacing: -0.5px;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+/* Thumbnail wrapper */
+.thumbnail-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* Hero thumbnail */
+.hero-thumb,
+.thumbnail-image img {
+  max-width: 720px;
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 1.25rem;
+  border: 1px solid #E3E6EA;
+  box-shadow:
+    0 18px 40px rgba(47, 85, 151, 0.18),
+    0 6px 16px rgba(47, 85, 151, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Subtle premium hover */
+.hero-thumb:hover,
+.thumbnail-image img:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 26px 60px rgba(47, 85, 151, 0.22),
+    0 10px 24px rgba(47, 85, 151, 0.12);
+}
+
+/* Subtitle / description */
+.subtitle {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  color: #6B6F76; /* secondary text */
+  font-size: 1.1rem; /* desktop default */
+  line-height: 1.8;
+}
+
+/* ===== Responsive refinements ===== */
+@media (max-width: 992px) {
+  .thumbnail-section {
+    padding: 3rem 1.25rem;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  .hero-thumb,
+  .thumbnail-image img {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .thumbnail-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .main-title {
+    font-size: 1.8rem; /* mobile */
+  }
+
+  .subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .hero-thumb,
+  .thumbnail-image img {
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .hero-thumb,
+  .thumbnail-image img {
+    max-width: 90%;
+  }
+}

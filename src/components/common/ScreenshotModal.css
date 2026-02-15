@@ -1,0 +1,123 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1050;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* Modal Content */
+.modal-content {
+  max-width: 850px;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+/* Close Button */
+.modal-close {
+  z-index: 10;
+}
+
+/* Main Image Container */
+.image-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main Image */
+.modal-image {
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+  background-color: rgba(91, 155, 213, 0.8);
+  color: #fff;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-arrow.left {
+  margin-right: 0.5rem;
+}
+
+.nav-arrow.right {
+  margin-left: 0.5rem;
+}
+
+.nav-arrow:hover {
+  background-color: #4A86E8;
+  transform: scale(1.1);
+}
+
+/* Thumbnail Strip */
+.thumbnail-strip {
+  padding: 0.5rem 0;
+  max-width: 100%;
+}
+
+.thumbnail-img {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.thumbnail-img.active-thumb {
+  transform: scale(1.1);
+  border-color: #5B9BD5 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1rem;
+  }
+
+  .modal-image {
+    max-height: 50vh;
+  }
+
+  .nav-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .thumbnail-img {
+    width: 50px;
+    height: 32px;
+  }
+}
+
+/* Make arrows always visible on mobile */
+@media (max-width: 576px) {
+  .nav-arrow.left,
+  .nav-arrow.right {
+    flex-shrink: 0;
+  }
+
+  .modal-image {
+    margin: 0 1rem;
+  }
+}

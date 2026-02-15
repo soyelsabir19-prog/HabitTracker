@@ -1,0 +1,94 @@
+.what-you-get {
+  margin: 40px 0;
+}
+
+/* Main Heading */
+.what-you-get h2 {
+  font-size: 2rem;       /* desktop default */
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #2F5597;        /* Dark Blue for headings */
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Paragraph / description */
+.what-you-get p {
+  font-size: 1.05rem;    /* desktop default */
+  color: #6B6F76;        /* Secondary text */
+  margin-bottom: 24px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Features titles */
+.features h4 {
+  font-size: 1.2rem;     /* desktop default */
+  font-weight: 600;
+  margin-top: 16px;
+  color: #5B9BD5;        /* Primary Blue for emphasis */
+}
+
+/* Feature list */
+.features ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin-top: 8px;
+  color: #333333;        /* Primary text for list items */
+}
+
+/* Optional: subtle spacing for list items */
+.features ul li {
+  margin-bottom: 6px;
+}
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 992px) {
+  .what-you-get h2 {
+    font-size: 1.75rem;
+  }
+
+  .what-you-get p {
+    font-size: 1rem;
+  }
+
+  .features h4 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .what-you-get h2 {
+    font-size: 1.5rem;
+  }
+
+  .what-you-get p {
+    font-size: 0.95rem;
+  }
+
+  .features h4 {
+    font-size: 1rem;
+  }
+
+  .features ul {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .what-you-get h2 {
+    font-size: 1.35rem;
+  }
+
+  .what-you-get p {
+    font-size: 0.9rem;
+  }
+
+  .features h4 {
+    font-size: 0.95rem;
+  }
+
+  .features ul {
+    padding-left: 18px;
+  }
+}

@@ -1,0 +1,252 @@
+/* ===== Desktop Purchase Card ===== */
+.purchase-card-wrapper {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.purchase-card {
+  background-color: #FFFFFF; /* card white */
+  border: 1px solid #E3E6EA; /* soft divider */
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 16px 32px rgba(47, 85, 151, 0.08);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Status badge */
+.status .badge {
+  background-color: #EAF1FB; /* very light blue */
+  color: #2F5597; /* dark blue text */
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #BDD7EE;
+}
+
+/* Pricing section */
+.pricing {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.pricing .original-price {
+  color: #6B6F76; /* secondary text */
+  text-decoration: line-through;
+  font-size: 1rem;
+}
+
+.pricing .current-price {
+  color: #2F5597; /* authority blue */
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* CTA Button - Desktop */
+.cta-button {
+  width: 100%;
+  background-color: #5B9BD5; /* primary blue */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #4A86E8; /* stronger accent */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(74, 134, 232, 0.35);
+}
+
+/* ===== Mobile Sticky CTA ===== */
+.mobile-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #F4F7FA; /* page bg for separation */
+  display: flex;
+  justify-content: center;
+  z-index: 999;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sticky-button {
+  width: 100%;
+  max-width: 600px;
+  background-color: #4A86E8; /* strong accent blue */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(74, 134, 232, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.sticky-button:hover {
+  background-color: #5B9BD5;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(74, 134, 232, 0.35);
+}
+
+/* ===== Responsive Visibility ===== */
+@media (min-width: 768px) {
+.mobile-sticky-cta {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(180deg, rgba(244,247,250,0.95), #F4F7FA);
+  z-index: 10;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+}
+
+@media (max-width: 767px) {
+  .purchase-card-wrapper {
+    display: none;
+  }
+}
+
+/* ===== Responsive Font Scaling ===== */
+@media (max-width: 992px) {
+  .purchase-card {
+    padding: 1.8rem 1.25rem;
+  }
+
+  .pricing .original-price {
+    font-size: 0.95rem;
+  }
+
+  .pricing .current-price {
+    font-size: 1.75rem;
+  }
+
+  .cta-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .sticky-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .purchase-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .pricing .original-price {
+    font-size: 0.9rem;
+  }
+
+  .pricing .current-price {
+    font-size: 1.5rem;
+  }
+
+  .cta-button {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .sticky-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* Mobile Sticky CTA */
+.mobile-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #F4F7FA; /* page bg */
+  z-index: 999;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Flex container for price + button */
+.mobile-price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+/* Mobile pricing text */
+.mobile-pricing {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.mobile-pricing .original-price {
+  color: #6B6F76;
+  text-decoration: line-through;
+  font-size: 0.85rem;
+}
+
+.mobile-pricing .current-price {
+  color: #2F5597;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Sticky button */
+.sticky-button {
+  flex-shrink: 0;
+  width: auto;
+  min-width: 120px;
+  background-color: #4A86E8;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(74, 134, 232, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.sticky-button:hover {
+  background-color: #5B9BD5;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(74, 134, 232, 0.35);
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .mobile-pricing .current-price {
+    font-size: 1.1rem;
+  }
+
+  .mobile-pricing .original-price {
+    font-size: 0.8rem;
+  }
+
+  .sticky-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+

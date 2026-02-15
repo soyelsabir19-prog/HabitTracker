@@ -1,0 +1,66 @@
+/* ================================
+   Left Column – Smooth Scroll
+================================ */
+.left-column {
+  max-height: 85vh; /* keeps column scrollable within viewport */
+  overflow-y: auto;
+  padding-right: 1rem;
+
+  /* smoother feel */
+  scroll-behavior: smooth;
+}
+
+/* ================================
+   Premium Scrollbar (Calm Blue)
+================================ */
+.left-column::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-column::-webkit-scrollbar-track {
+  background: #F4F7FA; /* page background */
+  border-radius: 8px;
+}
+
+.left-column::-webkit-scrollbar-thumb {
+  background-color: #8DB4E2; /* muted blue */
+  border-radius: 8px;
+  border: 2px solid #F4F7FA;
+}
+
+.left-column::-webkit-scrollbar-thumb:hover {
+  background-color: #5B9BD5; /* primary blue */
+}
+
+/* ================================
+   Main Card Container
+================================ */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+
+  /* softer, premium shadow */
+  box-shadow:
+    0 12px 24px rgba(47, 85, 151, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+
+  border: 1px solid #E3E6EA;
+}
+
+/* ================================
+   Responsive Adjustments
+================================ */
+@media (max-width: 992px) {
+  .left-column {
+    max-height: none; /* allow full scroll on mobile */
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .position-sticky {
+    position: relative !important; /* sticky only on desktop */
+    top: auto;
+    width: 100%;
+    margin-top: 24px;
+  }
+}
