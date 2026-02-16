@@ -1,23 +1,73 @@
-export async function createOrder(userData) {
-  const res = await fetch("http://localhost:5000/create-order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData)
-  });
+import axios from "axios";
 
-  const data = await res.json();
+export const createOrder = async (userData) => {
+  try {
+    // 1️⃣ Create order from backend
+    const { data } = await axios.post(
+      "/api/create-order",
+      {
+        amount: 49,
+        user: userData,
+      }
+    );
 
-  const options = {
-    key: import.meta.env.VITE_RAZORPAY_KEY,
-    amount: data.amount,
-    currency: "INR",
-    name: "Daily Habit Tracker",
-    order_id: data.orderId,
-    handler: function () {
-      alert("Payment successful! Check your email.");
-    }
-  };
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: data.amount,
+      currency: "INR",
 
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-}
+      name: "Habit Tracker",
+      description: "Premium Plan Access",
+
+      order_id: data.id,
+
+      prefill: {
+        name: userData.name || "",
+        email: userData.email || "",
+        contact: userData.phone || "",
+      },
+
+      handler: async function (response) {
+        try {
+          const verify = await axios.post(
+            "/api/verify-payment",
+            {
+              ...response,
+              name: userData.name,
+              email: userData.email,
+            }
+          );
+
+          if (verify.data.status === "success") {
+            window.location.href =
+              "/purchase-success?receipt=" +
+              verify.data.receiptId +
+              "&name=" +
+              userData.name +
+              "&email=" +
+              userData.email +
+              "&amount=49" +
+              "&orderId=" +
+              response.razorpay_order_id;
+          } else {
+            alert("Payment verification failed");
+          }
+        } catch (err) {
+          console.error("Verification error:", err);
+          alert("Verification failed");
+        }
+      },
+
+      theme: {
+        color: "#2563eb",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+
+  } catch (error) {
+    console.error("Order creation failed:", error);
+    alert("Something went wrong while initiating payment");
+  }
+};
