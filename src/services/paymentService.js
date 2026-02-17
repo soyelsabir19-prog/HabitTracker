@@ -28,25 +28,25 @@ export const createOrder = async (userData) => {
         contact: userData.phone || "",
       },
 
-      handler: async function (response) {
-        try {
-          // 3️⃣ Verify payment on backend
-          const verify = await axios.post(
-            "/api/verify-payment",
-            response
-          );
+     handler: async function (response) {
+  try {
+    const verify = await axios.post(
+      "/api/verify-payment",
+      response
+    );
 
-          if (verify.data.status === "success") {
-              // Redirect to purchase success page with token
+    if (verify.data.success) {
       window.location.href = `/purchase-success?token=${verify.data.token}`;
-          } else {
-            alert("Payment verification failed");
-          }
-        } catch (err) {
-          console.error("Verification error:", err);
-          alert("Verification failed");
-        }
-      },
+    } else {
+      alert("Payment verification failed");
+    }
+
+  } catch (err) {
+    console.error("Verification error:", err);
+    alert("Verification failed");
+  }
+},
+
 
       theme: {
         color: "#2563eb",
