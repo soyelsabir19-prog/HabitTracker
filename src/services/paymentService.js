@@ -4,7 +4,7 @@ export const createOrder = async (userData) => {
   try {
     // 1️⃣ Create order from backend
     const { data } = await axios.post(
-      "http://localhost:5000/create-order",
+      "/api/create-order",
       {
         amount: 49, // amount in INR (backend converts to paise)
         user: userData,
