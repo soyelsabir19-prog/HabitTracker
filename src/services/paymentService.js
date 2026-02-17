@@ -4,21 +4,22 @@ export const createOrder = async (userData) => {
   try {
     // 1️⃣ Create order from backend
     const { data } = await axios.post(
-      "/api/create-order",
+      "http://localhost:5000/create-order",
       {
-        amount: 49,
+        amount: 49, // amount in INR (backend converts to paise)
         user: userData,
       }
     );
 
+    // 2️⃣ Configure Razorpay Checkout
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: data.amount,
       currency: "INR",
 
+      // ✅ THIS FIXES EMPTY PRODUCT NAME
       name: "Habit Tracker",
       description: "Premium Plan Access",
-
       order_id: data.id,
 
       prefill: {
@@ -29,26 +30,15 @@ export const createOrder = async (userData) => {
 
       handler: async function (response) {
         try {
+          // 3️⃣ Verify payment on backend
           const verify = await axios.post(
-            "/api/verify-payment",
-            {
-              ...response,
-              name: userData.name,
-              email: userData.email,
-            }
+            "http://localhost:5000/verify-payment",
+            response
           );
 
           if (verify.data.status === "success") {
-            window.location.href =
-              "/purchase-success?receipt=" +
-              verify.data.receiptId +
-              "&name=" +
-              userData.name +
-              "&email=" +
-              userData.email +
-              "&amount=49" +
-              "&orderId=" +
-              response.razorpay_order_id;
+              // Redirect to purchase success page with token
+      window.location.href = `/purchase-success?token=${verify.data.token}`;
           } else {
             alert("Payment verification failed");
           }

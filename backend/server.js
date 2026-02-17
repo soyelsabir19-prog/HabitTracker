@@ -2,7 +2,6 @@ const express = require("express");
 const Razorpay = require("razorpay");
 const cors = require("cors");
 const crypto = require("crypto");
-const PDFDocument = require("pdfkit");
 require("dotenv").config();
 
 const app = express();
@@ -10,19 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ==============================
-   Temporary Storage (Memory)
-============================== */
-
-// token → product access
+// Temporary purchase storage
 const purchases = {};
 
-// paymentId → receipt details
-const payments = {};
-
-/* ==============================
-   Razorpay Instance
-============================== */
+// Razorpay instance
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -33,7 +23,7 @@ const razorpay = new Razorpay({
 ============================== */
 app.post("/create-order", async (req, res) => {
   try {
-    const { amount } = req.body;
+    const { amount, user } = req.body;
 
     const options = {
       amount: amount * 100, // convert to paise
@@ -53,52 +43,39 @@ app.post("/create-order", async (req, res) => {
    2️⃣ VERIFY PAYMENT
 ============================== */
 app.post("/verify-payment", (req, res) => {
-  const {
-    razorpay_order_id,
-    razorpay_payment_id,
-    razorpay_signature,
-    name,
-    email,
-  } = req.body;
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
 
-  const expectedSignature = crypto
-    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-    .update(body)
-    .digest("hex");
+    if (expectedSignature === razorpay_signature) {
+  const token = crypto.randomBytes(20).toString("hex");
 
-  if (expectedSignature === razorpay_signature) {
-    // Generate secure download token
-    const token = crypto.randomBytes(20).toString("hex");
+  purchases[token] = {
+    paymentId: razorpay_payment_id,
+    createdAt: Date.now(),
+  };
 
-    // Store product access token
-    purchases[token] = {
-      paymentId: razorpay_payment_id,
-      createdAt: Date.now(),
-    };
+  // Send the token to frontend
+  res.json({
+    status: "success",
+    token,           // this is now the download token
+    receiptId: razorpay_payment_id
+  });
+} else {
+  res.status(400).json({ status: "failure" });
+}
 
-    // Store receipt details
-    payments[razorpay_payment_id] = {
-      name: name || "Customer",
-      email: email || "N/A",
-      amount: 149,
-      orderId: razorpay_order_id,
-      date: new Date(),
-    };
-
-    return res.json({
-      status: "success",
-      token: token,
-      receiptId: razorpay_payment_id,
-    });
-  } else {
-    return res.status(400).json({ status: "failure" });
+  } catch (err) {
+    console.error("Error in /verify-payment:", err);
+    return res.status(500).json({ error: err.message });
   }
 });
 
+
+
 /* ==============================
-   3️⃣ SECURE PRODUCT DOWNLOAD
+   3️⃣ SECURE DOWNLOAD
 ============================== */
 app.get("/download-product", (req, res) => {
   const token = req.query.token;
@@ -114,52 +91,29 @@ app.get("/download-product", (req, res) => {
     return res.status(403).send("Token expired");
   }
 
-  
+  // ✅ Do NOT delete token here
   res.download(__dirname + "/private/product.pdf");
 });
 
+
+
 /* ==============================
-   4️⃣ DYNAMIC RECEIPT DOWNLOAD
+   downdload recipt
 ============================== */
 app.get("/download-receipt", (req, res) => {
   const id = req.query.id;
 
-  if (!id || !payments[id]) {
-    return res.status(404).send("Receipt not found");
-  }
+  // You can later generate dynamic receipt PDF here
+  // For now send static file
 
-  const payment = payments[id];
-
-  const doc = new PDFDocument();
-
-  res.setHeader("Content-Type", "application/pdf");
-  res.setHeader(
-    "Content-Disposition",
-    `attachment; filename=receipt-${id}.pdf`
-  );
-
-  doc.pipe(res);
-
-  // Receipt Content
-  doc.fontSize(22).text("Payment Receipt", { align: "center" });
-  doc.moveDown();
-
-  doc.fontSize(12).text(`Receipt ID: ${id}`);
-  doc.text(`Order ID: ${payment.orderId}`);
-  doc.text(`Name: ${payment.name}`);
-  doc.text(`Email: ${payment.email}`);
-  doc.text(`Amount Paid: ₹${payment.amount}`);
-  doc.text(`Date: ${payment.date.toLocaleString()}`);
-
-  doc.moveDown();
-  doc.text("Thank you for your purchase!", { align: "center" });
-
-  doc.end();
+  res.download("receipts/sample-receipt.pdf");
 });
+
 
 /* ==============================
    START SERVER
 ============================== */
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Backend running on port 5000");
 });
+
