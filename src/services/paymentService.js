@@ -32,7 +32,7 @@ export const createOrder = async (userData) => {
         try {
           // 3️⃣ Verify payment on backend
           const verify = await axios.post(
-            "http://localhost:5000/verify-payment",
+            "/api/verify-payment",
             response
           );
 
