@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -10,6 +11,4 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Main API working" });
 });
 
-export default function handler(req, res) {
-  return app(req, res);
-}
+export const handler = serverless(app);
