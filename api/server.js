@@ -11,4 +11,4 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Main API working" });
 });
 
-export const handler = serverless(app);
+export default serverless(app);
