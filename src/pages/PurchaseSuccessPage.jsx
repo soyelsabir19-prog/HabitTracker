@@ -7,7 +7,7 @@ export default function PurchaseSuccessPage() {
   const token = searchParams.get("token");
   const downloadProduct = () => {
     window.open(
-      `http://localhost:5000/download-product?token=${token}`,
+      `/api/download-product?token=${token}`,
       "_blank"
     );
 
