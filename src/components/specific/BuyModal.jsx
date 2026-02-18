@@ -16,7 +16,7 @@ export default function BuyModal({ onClose }) {
     }
 
     if (form.phone.length !== 10) {
-      alert("Enter valid 10-digit mobile number");
+      alert("Enter valid 10-digit mobile number.");
       return;
     }
 
