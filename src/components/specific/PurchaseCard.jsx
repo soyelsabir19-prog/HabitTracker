@@ -1,7 +1,7 @@
 import "./PurchaseCard.css";
 
 export default function PurchaseCard({
-  price = "49",
+  price = "1",
   originalPrice = "399",
   onBuyClick
 }) {

@@ -16,7 +16,7 @@ export default function PricingSection() {
         <li>Digital + printable</li>
       </ul>
 
-      <h3>₹49 (One-time)</h3>
+      <h3>₹1 (One-time)</h3>
 
       <button onClick={() => setOpen(true)}>Buy Now</button>
 

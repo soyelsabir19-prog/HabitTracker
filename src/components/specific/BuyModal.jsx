@@ -73,7 +73,7 @@ export default function BuyModal({ onClose }) {
           </div>
 
           <button className="pay-btn" onClick={handlePay}>
-            Pay ₹49 & Get Instant Access →
+            Pay ₹1 & Get Instant Access →
           </button>
 
           <button className="cancel-btn" onClick={onClose}>
