@@ -1,28 +1,45 @@
+import { useNavigate } from "react-router-dom";
+import "../styles/LegalPage.css";
+
 export default function RefundPolicyPage() {
+  const navigate = useNavigate();
+
   return (
-    <div className="legal-page container py-5">
-      <h1>Refund Policy</h1>
+    <div className="legal-wrapper">
+      <div className="legal-card">
 
-      <p>
-        All products sold on Discountware are digital downloads.
-      </p>
+        <button className="close-btn" onClick={() => navigate("/")}>
+          ✕
+        </button>
 
-      <h4>No Refund Policy</h4>
-      <p>
-        Due to the nature of digital products, all sales are final and non-refundable once the product has been downloaded.
-      </p>
+        <h1>Refund Policy</h1>
 
-      <h4>Technical Issues</h4>
-      <p>
-        If you experience any technical issue accessing your purchase, please contact us within 7 days at:
-        <br />
-        sabirinsight2004@gmail.com
-      </p>
+        <p>
+          Due to the nature of digital products, all sales are final.
+        </p>
 
-      <h4>Duplicate Charges</h4>
-      <p>
-        In case of duplicate payment, we will issue a refund after verification.
-      </p>
+        <h4>No Refunds</h4>
+        <p>
+          Once the product has been downloaded, refunds cannot be issued.
+        </p>
+
+        <h4>Duplicate Payments</h4>
+        <p>
+          In case of duplicate charges, refunds will be processed after verification.
+        </p>
+
+        <h4>Support</h4>
+        <p>
+          For technical issues, contact:
+          <br />
+          sabirinsight2004@gmail.com
+        </p>
+
+        <div className="legal-footer-note">
+          Last updated: January 2026
+        </div>
+
+      </div>
     </div>
   );
 }
